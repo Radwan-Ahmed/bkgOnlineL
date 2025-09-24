@@ -27,6 +27,12 @@
                         <input type="text" name="name" class="form-control" value="{{ auth()->user()->name }}" required>
                     </div>
                     <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control"
+                            value="{{ Auth::user()->email ?? '' }}" required>
+                    </div>
+
+                    <div class="mb-3">
                         <label class="form-label">Phone</label>
                         <input type="text" name="phone" class="form-control" required>
                     </div>

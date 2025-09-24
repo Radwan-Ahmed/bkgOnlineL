@@ -13,6 +13,9 @@
             <tr>
                 <th>#ID</th>
                 <th>User</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
                 <th>Product</th>
                 <th>Qty</th>
                 <th>Price</th>
@@ -26,6 +29,9 @@
                 <tr>
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->user->name ?? 'Guest' }}</td>
+                    <td>{{ $order->email }}</td>
+                    <td>{{ $order->phone }}</td>
+                     <td>{{ $order->address }}</td>
                     <td>{{ $order->product_name }}</td>
                     <td>{{ $order->quantity }}</td>
                     <td>৳{{ number_format($order->price, 2) }}</td>

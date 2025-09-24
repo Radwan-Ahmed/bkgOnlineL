@@ -12,6 +12,12 @@ class OrderController extends Controller
     // Place an order
     public function store(Request $request, $productId)
     {
+        $request->validate([
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'quantity' => 'nullable|integer|min:1',
+        ]);
         $product = Product::findOrFail($productId);
 
         Order::create([
@@ -19,6 +25,9 @@ class OrderController extends Controller
             'product_name' => $product->name,
             'quantity' => $request->quantity ?? 1,
             'price' => $product->price * ($request->quantity ?? 1),
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'email' => $request->email,
             'status' => 'pending',
         ]);
 
