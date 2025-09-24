@@ -38,10 +38,6 @@ Route::get('/register', function () {
     abort(404);
 });
 
-// Public login routes for normal users
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-
 
 //Admin
 // =====================
@@ -67,7 +63,15 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
 //USER SIDE
 
+// Public login routes for normal users
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
+
+
 // User product detail page
+
+
 // Home
 Route::get('/', function () {
     return view('home');
