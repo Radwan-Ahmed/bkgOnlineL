@@ -11,7 +11,7 @@
     <div class="mb-4">
         <strong>Filter by Category:</strong>
         @foreach($categories as $category)
-            <a href="{{ route('product.category', $category->id) }}" class="btn btn-outline-secondary btn-sm">{{ $category->name }}</a>
+            <a href="{{ route('category.show', $category->id) }}" class="btn btn-outline-secondary btn-sm">{{ $category->name }}</a>
         @endforeach
     </div>
 

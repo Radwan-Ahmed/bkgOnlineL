@@ -28,24 +28,47 @@
 
 
 <!-- Carousel Banner -->
-<div id="homeCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-    <div class="carousel-inner" style="height: 400px;">
-        @foreach(App\Models\Banner::all() as $key => $banner)
-        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-            <img src="{{ asset('images/banners/'.$banner->image) }}"
-                 class="d-block w-100 h-100 object-fit-cover"
-                 alt="{{ $banner->title }}">
-        </div>
-        @endforeach
-    </div>
+<div class="container mt-4">
+    <div class="row">
+        <!-- Left carousel -->
+        <div class="col-md-8 mb-3">
+            <div id="bigBannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                <!-- Indicators -->
+                <div class="carousel-indicators">
+                    @foreach(App\Models\Banner::all() as $key => $banner)
+                        <button type="button" data-bs-target="#bigBannerCarousel" data-bs-slide-to="{{ $key }}"
+                                class="{{ $key == 0 ? 'active' : '' }}" aria-current="{{ $key == 0 ? 'true' : 'false' }}"
+                                aria-label="Slide {{ $key+1 }}"></button>
+                    @endforeach
+                </div>
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
+                <!-- Carousel items -->
+                <div class="carousel-inner" style="height: 450px;">
+                    @foreach(App\Models\Banner::all() as $key => $banner)
+                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                            <img src="{{ asset('images/banners/'.$banner->image) }}"
+                                 class="d-block w-100 h-100 object-fit-cover rounded"
+                                 alt="{{ $banner->title }}">
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <!-- Right fixed 3 images -->
+        <div class="col-md-4 d-flex flex-column gap-2">
+            @foreach(App\Models\Banner::take(3)->get() as $banner)
+                <div class="flex-fill">
+                    <img src="{{ asset('images/banners/'.$banner->image) }}"
+                         class="d-block w-100 object-fit-cover rounded"
+                         style="height: 130px;"
+                         alt="{{ $banner->title }}">
+                </div>
+            @endforeach
+        </div>
+    </div>
 </div>
+
 
 
 
@@ -53,7 +76,7 @@
 <div class="container my-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold mb-0">🆕 Latest Products</h2>
-        <a href="{{ route('products.index') }}" class="btn btn-outline-primary btn-sm">
+        <a href="{{ route('product.index') }}" class="btn btn-outline-primary btn-sm">
             View All →
         </a>
     </div>
@@ -100,6 +123,10 @@
                             @csrf
                             <button type="submit" class="btn btn-sm btn-success">🛒 Add to Cart</button>
                         </form>
+                        <a href="{{ route('checkout', $product->id) }}" class="btn btn-warning w-100 mt-2">
+                        Buy Now
+                       </a>
+
                     </div>
                 </div>
             </div>

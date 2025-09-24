@@ -37,7 +37,7 @@
                             <td>{{ $product->created_at->format('d-m-Y') }}</td>
                             <td>
                                 @if($product->image)
-                                    <img src="{{ asset('images/'.$product->image) }}"
+                                    <img src="{{ asset('images/products/'.$product->image) }}"
                                          alt="Product Image"
                                          class="img-thumbnail" width="60">
                                 @else

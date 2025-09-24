@@ -15,6 +15,7 @@ class AdminController extends Controller
     {
         $query = Product::query();
 
+
         // Search by name
         if ($request->has('search') && $request->search != '') {
             $query->where('name', 'like', '%' . $request->search . '%');
@@ -25,7 +26,7 @@ class AdminController extends Controller
         $totalProducts = Product::count();
         $totalAdmins = Admin::count();
         $totalUsers = User::count();
-        $latestProducts = $query->latest()->paginate(5);
+        $latestProducts = $query->latest()->paginate(10);
 
         return view('admin.dashboard', compact(
             'totalCategories',

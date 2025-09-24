@@ -81,9 +81,33 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
 });
-Route::middleware('auth')->group(function () {
+//user order
+Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+    Route::post('/order/{productId}', [OrderController::class, 'store'])->name('order.store');
+    Route::post('/orders/cancel/{id}', [OrderController::class, 'cancel'])->name('orders.cancel');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout/{product}', [OrderController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout/{product}', [OrderController::class, 'store'])->name('order.store');
+});
+// Cancel order
+Route::post('/orders/{id}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
+
+
+//admin order
+
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+
+Route::prefix('admin')->name('admin.')->middleware(['auth:admin'])->group(function () {
+    Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
+    Route::put('/orders/{order}', [AdminOrderController::class, 'update'])->name('orders.update');
+    Route::delete('/orders/{order}', [AdminOrderController::class, 'destroy'])->name('orders.destroy');
+});
+
+
 
 
 // User product pages

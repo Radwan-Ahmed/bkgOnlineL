@@ -16,9 +16,10 @@
                 <thead class="table-light">
                     <tr>
                         <th>ID</th>
-                        <th>Image</th>
+
                         <th>Name</th>
                         <th>Slug</th>
+                         <th>Image</th>
                         <th class="text-end">Actions</th>
                     </tr>
                 </thead>
@@ -26,22 +27,24 @@
                 @forelse($categories as $category)
                     <tr>
                         <td>{{ $category->id }}</td>
-                        <td>
-                            @if($category->image)
-                                <img src="{{ asset('images/categories/'.$category->image) }}" alt="{{ $category->name }}" width="50" class="rounded">
-                            @else
-                                <span class="text-muted">No Image</span>
-                            @endif
-                        </td>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->slug }}</td>
+                        <td>
+                                @if($category->image)
+                                    <img src="{{ asset('images/categories/'.$category->image) }}"
+                                         alt="Product Image"
+                                         class="img-thumbnail" width="60">
+                                @else
+                                    <span class="text-muted">No Image</span>
+                                @endif
+                        </td>
                         <td class="text-end">
-                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-primary me-1">Edit</a>
+                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-primary me-1">✏️ Edit</a>
                             <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
-                                    Delete
+                                   🗑 Delete
                                 </button>
                             </form>
                         </td>

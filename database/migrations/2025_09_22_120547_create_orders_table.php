@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('product_name');
             $table->integer('quantity')->default(1);
             $table->decimal('price', 10, 2);
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
 

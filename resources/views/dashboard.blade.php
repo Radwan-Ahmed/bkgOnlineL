@@ -31,7 +31,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Recent Products</h5>
                     <p class="fs-3">{{ $recentProducts->count() ?? 0 }}</p>
-                    <a href="{{ route('products.index') }}" class="btn btn-sm btn-outline-primary">Shop Now</a>
+                    <a href="{{ route('product.index') }}" class="btn btn-sm btn-outline-primary">Shop Now</a>
                 </div>
             </div>
         </div>

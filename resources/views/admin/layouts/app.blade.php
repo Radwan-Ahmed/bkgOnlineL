@@ -39,18 +39,32 @@
                 </div>
             </li>
              <li class="nav-item mb-2">
-                <a class="nav-link collapsed" data-bs-toggle="collapse" href="#productMenu" role="button"><i class="bi bi-box-seam me-2"></i> Banners</a>
-                <div class="collapse submenu" id="productMenu">
+                <a class="nav-link collapsed" data-bs-toggle="collapse" href="#bannerMenu" role="button"><i class="bi bi bi-image me-2"></i> Banners</a>
+                <div class="collapse submenu" id="bannerMenu">
                     <a class="nav-link" href="{{ route('banners.index') }}">All Banners</a>
                     <a class="nav-link" href="{{ route('banners.create') }}">Add Banners</a>
                 </div>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.orders.index') }}" class="nav-link bi bi-box-seam me-2">
+                  Orders
+                   @php
+                    $pendingCount = \App\Models\Order::where('status', 'pending')->count();
+                   @endphp
+                   @if($pendingCount > 0)
+                    <span class="badge bg-danger ms-1">{{ $pendingCount }}</span>
+                   @endif
+                </a>
+            </li>
+
+
             <li class="nav-item mt-4">
                 <form method="POST" action="{{ route('admin.logout') }}">
                     @csrf
                     <button class="btn btn-outline-light w-100"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
                 </form>
             </li>
+
         </ul>
     </div>
 

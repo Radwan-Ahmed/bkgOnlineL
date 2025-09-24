@@ -51,7 +51,7 @@
         </div>
         <div class="card-body table-responsive">
             <h2 class="mt-5">Latest Products</h2>
-<table class="table table-bordered">
+            <table class="table table-bordered">
     <thead>
         <tr>
             <th>ID</th>

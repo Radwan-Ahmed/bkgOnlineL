@@ -43,7 +43,11 @@
                             <form action="{{ route('cart.add', $related->id) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-success btn-sm w-100">Add to Cart</button>
-                            </form>
+                                <a href="{{ route('checkout', $product->id) }}" class="btn btn-warning w-100 mt-2">
+                              Buy Now
+                                </a>
+
+
                         </div>
                     </div>
                 </div>
